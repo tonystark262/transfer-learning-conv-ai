@@ -102,8 +102,7 @@ def build_input_from_segments(persona,
         print(tokenizer.decode(instance['input_ids']))
         print(tokenizer.decode(list(chain(*persona))))
         print(tokenizer.decode(list(chain(*history))))
-        print(reply)
-        print(tokenizer.decode(list(chain(*reply))))
+        print(tokenizer.decode(reply)
 
     return instance
 
