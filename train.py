@@ -297,6 +297,7 @@ def train():
         print(tokenizer.convert_ids_to_tokens(input_ids[0][1]))
         print(tokenizer.decode(input_ids[0][1]))
         print(mc_token_ids)
+        print(mc_labels)
         print(token_type_ids)
         print(lm_labels)
         print(tokenizer.convert_ids_to_tokens(lm_labels[0][1]))
