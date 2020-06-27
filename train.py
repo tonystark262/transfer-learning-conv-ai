@@ -95,9 +95,14 @@ def build_input_from_segments(persona,
         instance["lm_labels"] = (
             [-100] * sum(len(s)
                          for s in sequence[:-1])) + [-100] + sequence[-1][1:]
-    print(instance)
-    print(tokenizer.convert_ids_to_tokens(instance['input_ids']))
-    print(tokenizer.decode(instance['input_ids']))
+    if lm_labels:
+        print(len(instance['input_ids']))
+        print(instance)
+        print(tokenizer.convert_ids_to_tokens(instance['input_ids']))
+        print(tokenizer.decode(instance['input_ids']))
+        print(tokenizer.decode(list(chain(*persona)))
+        print(tokenizer.decode(list(chain(*history)))
+        print(tokenizer.decode(list(chain(*reply)))
 
     return instance
 
