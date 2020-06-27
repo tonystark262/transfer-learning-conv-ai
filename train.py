@@ -294,7 +294,10 @@ def train():
         print(input_ids.shape, token_type_ids.shape, mc_token_ids.shape,
               lm_labels.shape, mc_labels.shape)
 
-        print(tokenizer.convert_ids_to_tokens(input_ids[0][1]))
+        for i, a in enumerate(tokenizer.convert_ids_to_tokens(
+                input_ids[0][1])):
+            print(i, a)
+        # print(tokenizer.convert_ids_to_tokens(input_ids[0][1]))
         print(tokenizer.decode(input_ids[0][1]))
         print(mc_token_ids)
         print(mc_labels)
