@@ -114,7 +114,7 @@ def sample_sequence(personality,
         if prev.item() in special_tokens_ids:
             break
         current_output.append(prev.item())
-        out_text = tokenizer.decode(current_output, skip_special_tokens=True)
+        out_text = tokenizer.decode(current_output, skip_special_tokens=False)
         print(out_text)
 
     return current_output
