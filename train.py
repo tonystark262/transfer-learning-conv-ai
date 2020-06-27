@@ -403,8 +403,7 @@ def train():
         tb_logger.attach(evaluator,
                          log_handler=OutputHandler(tag="validation",
                                                    metric_names=list(
-                                                       metrics.keys()),
-                                                   another_engine=trainer),
+                                                       metrics.keys())),
                          event_name=Events.EPOCH_COMPLETED)
 
         checkpoint_handler = ModelCheckpoint(log_dir,
