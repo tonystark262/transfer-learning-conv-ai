@@ -293,8 +293,10 @@ def train():
         input_ids, mc_token_ids, lm_labels, mc_labels, token_type_ids = batch
         print(input_ids.shape, token_type_ids.shape, lm_labels.shape)
 
-        print(tokenizer.convert_ids_to_tokens(input_ids))
-        print(tokenizer.decode(input_ids))
+        print(tokenizer.convert_ids_to_tokens(input_ids[0][0]))
+        print(tokenizer.decode(input_ids[0][0]))
+        print(tokenizer.convert_ids_to_tokens(input_ids[0][1]))
+        print(tokenizer.decode(input_ids[0][1]))
         print(mc_token_ids)
         print(token_type_ids)
         print(lm_labels)
