@@ -291,16 +291,15 @@ def train():
     for batch in train_loader:
         batch = tuple(input_tensor.to(args.device) for input_tensor in batch)
         input_ids, mc_token_ids, lm_labels, mc_labels, token_type_ids = batch
-        print(input_ids.shape, token_type_ids.shape, lm_labels.shape)
+        print(input_ids.shape, token_type_ids.shape, mc_token_ids.shape,
+              lm_labels.shape, mc_labels.shape)
 
-        print(tokenizer.convert_ids_to_tokens(input_ids[0][0]))
-        print(tokenizer.decode(input_ids[0][0]))
         print(tokenizer.convert_ids_to_tokens(input_ids[0][1]))
         print(tokenizer.decode(input_ids[0][1]))
         print(mc_token_ids)
         print(token_type_ids)
         print(lm_labels)
-        print(tokenizer.convert_ids_to_tokens(lm_labels))
+        print(tokenizer.convert_ids_to_tokens(lm_labels[0][1]))
 
         exit(0)
 
