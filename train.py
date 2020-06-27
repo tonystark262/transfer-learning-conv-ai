@@ -95,15 +95,6 @@ def build_input_from_segments(persona,
         instance["lm_labels"] = (
             [-100] * sum(len(s)
                          for s in sequence[:-1])) + [-100] + sequence[-1][1:]
-    if lm_labels:
-        print(len(instance['input_ids']), len(instance['token_type_ids']),
-              len(instance['lm_labels']))
-        print(instance)
-        print(tokenizer.convert_ids_to_tokens(instance['input_ids']))
-        print(tokenizer.decode(instance['input_ids']))
-        print(tokenizer.decode(list(chain(*persona))))
-        print(tokenizer.decode(list(chain(*history))))
-        print(tokenizer.decode(reply))
 
     return instance
 
@@ -297,11 +288,24 @@ def train():
     train_loader, val_loader, train_sampler, valid_sampler = get_data_loaders(
         args, tokenizer)
 
+    for batch in train_loader:
+        batch = tuple(input_tensor.to(args.device) for input_tensor in batch)
+        input_ids, mc_token_ids, lm_labels, mc_labels, token_type_ids = batch
+        print(input_ids.shape, token_type_ids.shape, lm_labels.shape)
+
+        print(tokenizer.convert_ids_to_tokens(input_ids))
+        print(tokenizer.decode(input_ids))
+        print(mc_token_ids)
+        print(token_type_ids)
+        print(lm_labels)
+        print(tokenizer.convert_ids_to_tokens(lm_labels))
+
     # Training function and trainer
     def update(engine, batch):
         model.train()
         batch = tuple(input_tensor.to(args.device) for input_tensor in batch)
         input_ids, mc_token_ids, lm_labels, mc_labels, token_type_ids = batch
+
         (lm_loss), (mc_loss), *_ = model(input_ids,
                                          token_type_ids=token_type_ids,
                                          mc_token_ids=mc_token_ids,
