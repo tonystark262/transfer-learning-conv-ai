@@ -153,7 +153,7 @@ def get_data_loaders(args, tokenizer):
     train_loader = DataLoader(train_dataset,
                               sampler=train_sampler,
                               batch_size=args.train_batch_size,
-                              shuffle=(not args.distributed))
+                              shuffle=False)
     valid_loader = DataLoader(valid_dataset,
                               sampler=valid_sampler,
                               batch_size=args.valid_batch_size,
