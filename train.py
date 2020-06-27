@@ -97,7 +97,8 @@ def build_input_from_segments(persona,
                          for s in sequence[:-1])) + [-100] + sequence[-1][1:]
     print(instance)
     print(tokenizer.convert_ids_to_tokens(instance['input_ids']))
-    exit(0)
+    print(tokenizer.decode(instance['input_ids']))
+
     return instance
 
 
