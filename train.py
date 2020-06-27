@@ -302,6 +302,8 @@ def train():
         print(lm_labels)
         print(tokenizer.convert_ids_to_tokens(lm_labels))
 
+        exit(0)
+
     # Training function and trainer
     def update(engine, batch):
         model.train()
