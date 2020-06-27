@@ -337,6 +337,25 @@ def train():
         print(lm_labels)
         print(tokenizer.convert_ids_to_tokens(lm_labels[0][1]))
 
+        model.eval()
+        with torch.no_grad():
+
+            print(tokenizer.decode(input_ids[0, -1, :].tolist()))
+            # if we dont send labels to model, it doesnt return losses
+            lm_logits, mc_logits, *_ = model(
+                input_ids,
+                token_type_ids=token_type_ids,
+                mc_token_ids=mc_token_ids,
+            )
+            lm_logits_flat_shifted = lm_logits[..., :-1, :].contiguous().view(
+                -1, lm_logits.size(-1))
+            lm_labels_flat_shifted = lm_labels[..., 1:].contiguous().view(-1)
+
+            print(lm_logits_flat_shifted.shape)
+            print(lm_logits_flat_shifted)
+            print(lm_labels_flat_shifted.shape)
+            print(lm_labels_flat_shifted)
+
         break
 
     exit(0)
